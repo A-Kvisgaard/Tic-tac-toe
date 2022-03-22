@@ -12,7 +12,10 @@ describe('Get /', () => {
         .then(res => { 
             expect(res).to.have.status(200);
             expect(res.body).to.be.json;
-            console.log(res.body);
+            expect(res.body.board).to.be.an("array");
+            expect(res.body.score.X).to.equal(0);
+            expect(res.body.score.O).to.equal(0);
+            expect(res.body.currentTurn).to.equal("X");
         })
         .catch(err => { throw err });
         
@@ -88,8 +91,8 @@ describe('POST /restart', () => {
         .set('Content-Type', 'application/json')
         .then(res => { 
             expect(res).to.have.status(200);
-            expect(res.body.score.x).to.equal(1);
-            expect(res.body.score.x).to.equal(0);
+            expect(res.body.score.X).to.equal(1);
+            expect(res.body.score.O).to.equal(0);
             expect(res.body.board).to.equal([['', '', ''],['', '', ''],['', '', '']])
         })
         .catch(err => { throw err })
@@ -112,8 +115,8 @@ describe('POST /restart', () => {
         .set('Content-Type', 'application/json')
         .then(res => { 
             expect(res).to.have.status(200);
-            expect(res.body.score.x).to.equal(1);
-            expect(res.body.score.x).to.equal(0);
+            expect(res.body.score.X).to.equal(1);
+            expect(res.body.score.O).to.equal(0);
             expect(res.body.board).to.equal([['', '', ''],['', '', ''],['', '', '']])
         })
         .catch(err => { throw err })
