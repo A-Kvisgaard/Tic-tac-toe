@@ -36,13 +36,23 @@ describe('POST /:piece', () =>{
         .catch(err => { throw err })
 
     })
-    it('Should\'nt allow X as second piece', ()=>{
+    it('Should not allow X as second piece', ()=>{
         chai.request(app)
         .post('/x')
         .send({"x": 0,"y": 0})
         .set('Content-Type', 'application/json')
         .then(res => { 
             expect(res).to.have.status(406);
+        })
+        .catch(err => { throw err })
+    })
+    it('Should not allow to place O on existing piece', ()=>{
+        chai.request(app)
+        .post('/o')
+        .send({"x": 0,"y": 0})
+        .set('Content-Type', 'application/json')
+        .then(res => { 
+            expect(res).to.have.status(409);
         })
         .catch(err => { throw err })
     })
